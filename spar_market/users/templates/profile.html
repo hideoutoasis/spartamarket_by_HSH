@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{ member.username }}의 사용자 프로필</h1>
+
+<p>
+    사용자 이름: {{ member.username }}
+
+    {% if request.user != member %}
+        <form action="{% url "follow" member.pk%}" method="POST">
+            {% csrf_token %}
+        
+            {% if request.user in member.followers.all %}
+                <button type="submit">팔로우 취소</button>
+            
+            {% else %}
+                <button type="submit">팔로우</button>
+        
+            {% endif %}
+        </form>
+    {% endif %}
+</p><br>
+
+<a href="{% url "index" %}"><button>메인 페이지로 돌아가기</button></a>
+
+{% endblock content %}
