@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>글 상세 페이지</h2>
+<p>제목: {{ product.title }}</p>
+<p>작성자: {{ product.author.username }}</p>
+
+{% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.image }}">
+{% endif %}
+
+<p>내용: {{ product.content }}</p>
+<p>작성일시: {{ product.created_at }}</p>
+<p>수정일시: {{ product.updated_at }}</p>
+
+{% comment %} DB 조작이 없는 GET 요청이므로 form 안써도 됨 {% endcomment %}
+
+<a href="{% url "products" %}">글 목록으로 돌아가기</a><br><br>
+
+{% if user == product.author %}
+<a href="{% url "update" product.pk %}">글 수정하기</a><br><br>
+
+<form action="{% url "delete" product.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">삭제</button>
+</form>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<br>
+<hr>
+{% comment %} 댓글작성로직 {% endcomment %}
+<h3>댓글 {{ comments|length }}</h3>
+<form action="{% url "comment_create" product.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">댓글 작성</button>
+</form>
+{% endif %}
+
+{% comment %} 댓글삭제로직 {% endcomment %}
+{% for comment in comments %}
+<ul>
+    <li>{{ comment.user.username }}<br>
+        {{ comment.content }} </li>
+
+    {% if user == comment.user %}
+    <form action="{% url "comment_delete" product.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">삭제</button>
+    </form>
+    {% endif %}
+</ul>
+
+{% empty %}
+<p>댓글이 없습니다.</p>
+
+{% endfor %}
+
+{% endblock content %}

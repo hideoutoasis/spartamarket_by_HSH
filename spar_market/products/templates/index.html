@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My First Django PJT</title>
-    </head>
-    <body>
-        <h1>My First Django Project</h1>
-        <p>My first Django project is working!</p>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h1>INDEX 메인 페이지</h1>
+
+<img src="{% static "products/coinman.png" %}" alt="coinman">
+<ul>
+    <li><a href="{% url "users" %}">사용자 페이지로 이동</a><br></li>
+    <li><a href="{% url "products" %}">글 목록으로 이동</a><br></li>
+    <li><a href="{% url "create" %}">글쓰기 페이지로 이동</a><br></li>
+</ul>
+
+{% endblock content %}
