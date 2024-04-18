@@ -30,3 +30,7 @@ AI6기 장고 개인과제
 <제작자>
 이 제품의 제작자는 저 한 명입니다.
 첫 장고 프로젝트여서 긴장 가득하지만 즐겁게 만들어 봤습니다.
+
+<ERD>
+![spartamarket ERD](https://github.com/hideoutoasis/spartamarket_by_HSH/assets/122522460/aa8b950f-6dab-4625-b824-64318ffead27)
+  
