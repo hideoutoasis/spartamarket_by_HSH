@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>글 목록</h1>
+<br>
+<h1>중고거래 매물</h1>
 
 {% if request.user.is_authenticated %}
-    <a href="{% url "create" %}"><button>새로운 글 작성하기</button></a>
+    <a href="{% url "create" %}"><button>새로운 매물 올리기</button></a>
 
 {% else %}
     <a href="{% url "accounts:login" %}"><button>로그인하고 글 작성하기</button></a>
@@ -12,7 +13,7 @@
 
 {% for product in products %}
     <a href="{% url "product_detail" product.pk %}">
-    <p>[{{ product.pk }}] {{ product.title }} [작성자: {{ product.author }}]</p>
+    <p>{{ product.title }} [작성자: {{ product.author }}]</p>
     </a>
 
     {% comment %} 좋아요 기능 {% endcomment %}
@@ -30,7 +31,7 @@
             <i class="fa-regular fa-heart"></i>
         </button>
         
-    {% endif %}
+{% endif %}
     
     </form>
     <hr>

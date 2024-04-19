@@ -16,14 +16,14 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">스파르타 마켓</a>
+        <a class="navbar-brand" href="{% url "index" %}">스파르타 마켓</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">중고거래</a>
+              <a class="nav-link" aria-current="page" href="{% url "products" %}">중고거래</a>
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
@@ -31,7 +31,7 @@
                 내 계정
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">내 프로필</a></li>
+                <li><a class="dropdown-item" href="{% url "profile" user.username %}">내 프로필</a></li>
                 <li><a class="dropdown-item" href="{% url "accounts:update" %}">회원정보 수정</a></li>
                 <li>
                   <form action="{% url 'accounts:quit' %}" method="POST">
@@ -60,38 +60,15 @@
               </ul>
             </li>
             {% endif %}
-
           </ul>
-          {% comment %} <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button> {% endcomment %}
+          <div class = "navbar">
+            {% if request.user.is_authenticated %}
+            <h5>{{ request.user.username }}</h5>
+            {% endif %}
+          </div>
         </div>
       </div>
     </nav>
-
-    <div class = "navbar">
-      {% if request.user.is_authenticated %}
-      <h4>안녕하세요 {{ request.user.username }}님</h4>
-      {% comment %} <form action="{% url 'accounts:logout' %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">로그아웃</button>
-      </form>
-
-      <a href="{% url "accounts:update" %}"><button>회원정보 수정</button></a>
-
-      <form action="{% url 'accounts:quit' %}" method="POST">
-        {% csrf_token %}
-        <button type="submit">회원탈퇴</button>
-      </form>
-      {% comment %} 로그인 된 상태 {% endcomment %}
-
-      {% comment %} {% else %}
-        <a href="{% url "accounts:login" %}"><button>로그인</button></a>
-        <a href="{% url "accounts:signup" %}"><button>회원가입</button></a>
-        {% comment %} 로그인 안된 상태 {% endcomment %}
-
-      {% endif %}
-    </div>
 
     <div class="container">
     {% block content %}

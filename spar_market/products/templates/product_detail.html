@@ -1,24 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>글 상세 페이지</h2>
+<h2>메물 상세페이지</h2>
 <p>제목: {{ product.title }}</p>
-<p>작성자: {{ product.author.username }}</p>
+<p>작성자: <a href="{% url "profile" product.author.username %}">{{ product.author.username }}</a></p>
 
 {% if product.image %}
     <img src="{{ product.image.url }}" alt="{{ product.image }}">
 {% endif %}
 
 <p>내용: {{ product.content }}</p>
-<p>작성일시: {{ product.created_at }}</p>
-<p>수정일시: {{ product.updated_at }}</p>
 
 {% comment %} DB 조작이 없는 GET 요청이므로 form 안써도 됨 {% endcomment %}
 
-<a href="{% url "products" %}">글 목록으로 돌아가기</a><br><br>
+<a href="{% url "products" %}">매물 목록으로 돌아가기</a><br><br>
 
 {% if user == product.author %}
-<a href="{% url "update" product.pk %}">글 수정하기</a><br><br>
+<a href="{% url "update" product.pk %}">수정하기</a><br><br>
 
 <form action="{% url "delete" product.pk %}" method="POST">
     {% csrf_token %}
