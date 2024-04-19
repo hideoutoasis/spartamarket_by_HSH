@@ -2,9 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth import get_user_model
 
-def users(request):
-    return render(request, "users.html")
-
 def profile(request, username):
     member = get_object_or_404(get_user_model(), username=username)
     context = {
