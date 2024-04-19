@@ -3,8 +3,14 @@
 
 <h1>{{ member.username }}의 사용자 프로필</h1>
 
-<p>
-    사용자 이름: {{ member.username }}
+<div>
+    <h2>사용자 이름 : {{ member.username }}</h2><br>
+    <p>가입일자 : {{ member.date_joined }}</p><br>
+    <p>
+        팔로워 : {{ member.followers.count }}<br>
+    </p>
+</div>
+
 
     {% if request.user != member %}
         <form action="{% url "follow" member.pk%}" method="POST">

@@ -3,13 +3,12 @@
 {% load static %}
 
 {% block content %}
-<h1>INDEX 메인 페이지</h1>
+<h1>스파르타 마켓</h1>
 
-<img src="{% static "products/coinman.png" %}" alt="coinman">
 <ul>
-    <li><a href="{% url "users" %}">사용자 페이지로 이동</a><br></li>
-    <li><a href="{% url "products" %}">글 목록으로 이동</a><br></li>
-    <li><a href="{% url "create" %}">글쓰기 페이지로 이동</a><br></li>
+    <li><a href="{% url "products" %}">중고거래 매물목록</a><br></li>
+    <li><a href="{% url "create" %}">중고거래 글쓰기</a><br></li>
+    <li><a href="{% url "users" %}">회원 프로필</a><br></li>
 </ul>
 
 {% endblock content %}
