@@ -8,8 +8,16 @@
     <p>가입일자 : {{ member.date_joined }}</p><br>
     <p>
         팔로워 : {{ member.followers.count }}<br>
-    </p>
-</div>
+    </p><br><br>
+
+    <h3>등록한 매물</h3><br>
+    <ul>
+        {% for product in member.products.all %}
+        <li><a href="{% url "product_detail" product.pk %}">
+            <p>{{ product.title }}</p>
+        </a></li>
+        {% endfor %}
+    </ul>
 
     {% if request.user != member %}
         <form action="{% url "follow" member.pk%}" method="POST">
