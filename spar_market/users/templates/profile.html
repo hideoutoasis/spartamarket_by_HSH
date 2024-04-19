@@ -11,6 +11,14 @@
     </p>
 </div>
 
+<div>
+    {% for product in products %}
+    <a href="{% url "product_detail" product.pk %}">
+    <p>{{ product.title }} [작성자: {{ product.author }}]</p>
+    </a>
+    {% endfor %}
+</div>
+
 
     {% if request.user != member %}
         <form action="{% url "follow" member.pk%}" method="POST">
